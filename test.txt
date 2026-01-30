@@ -1,0 +1,2 @@
+// Picks the latest Relationship per documentId and maps it to a response.
+return grouped.entrySet() .stream() .map(entry -> { String documentId = entry.getKey(); return entry.getValue().stream() .filter(hr -> hr.getDocument() != null) .max(Comparator.comparing( hr -> hr.getDocument().getVersion() )) // latest version .map(hr -> { Relationship rel = hr.getDocument(); // propagate documentId rel.setId(documentId); return relationshipV2Mapper .toRelationshipResponse(rel, objectMapper); }) .orElse(null); }) .filter(Objects::nonNull) .toList();
