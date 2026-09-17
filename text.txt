@@ -1,0 +1,1 @@
+git restore --source=origin/develop --staged --worktree -- src/main/resources/rds-truststore.jks src/main/resources/vault/truststore.jks
